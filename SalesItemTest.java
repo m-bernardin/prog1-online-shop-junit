@@ -69,4 +69,50 @@ public class SalesItemTest
         assertEquals("test name", salesIte1.getName());
         assertEquals(1000, salesIte1.getPrice());
     }
+    
+    @Test
+    public void testDuplicateAuthor()
+    {
+        SalesItem salesIte = new SalesItem("How to Play Guitar With Long Nails, Vol 8", 200000);
+        salesIte.addComment("Brisk Man", "I still can't play :(", 1);
+        assertEquals(false, salesIte.addComment("Brisk Man", "I still can't play :(", 1));
+    }
+    
+    @Test
+    public void testOverRatingBoundary()
+    {
+        SalesItem salesIte = new SalesItem("The Complete Works of Dingus, revised Edition",19999);
+        assertEquals(false, salesIte.addComment("Wayde Borkus", "Amazing collection, Dingus is truly one of the greats of our time.", 6)); 
+    }
+    
+    @Test
+    public void testUnderRatingBoundary()
+    {
+        SalesItem salesIte = new SalesItem("The Complete Works of Borkus, revised Edition",19999);
+        assertEquals(false, salesIte.addComment("Wayde Dingus", "Horrible. Borkus has always thought he's better than me.", 0)); 
+    }
+    
+    @Test
+    public void testMostHelpfulComment()
+    {
+        SalesItem salesIte = new SalesItem("Overpriced Fancy Shoes", 100000000);
+        salesIte.addComment("John Collector", "Amazing shoes and I trust this seller, I've bought many shoes from them before.", 5);
+        Comment mostHelpful = salesIte.findMostHelpfulComment();
+        assertEquals("John Collector", mostHelpful.getAuthor());
+    }
+    
+    @Test
+    public void testGetNumberOfComments()
+    {
+        SalesItem salesIte = new SalesItem("Picture of a Banana, oil on canvas, W. Dingus c. 2003", 10000000);
+        salesIte.addComment("John Collector", "Another beuatiful work by Mr Dingus", 5);
+        assertEquals(1, salesIte.getNumberOfComments());
+    }
+    
+    @Test
+    public void testPriceString()
+    {
+        SalesItem salesIte = new SalesItem("Borkus no. 9, various mediums, W. Borkus c. 2000", 200000000);
+        assertEquals("$2000000.00", salesIte.priceString(salesIte.getPrice()));
+    }
 }

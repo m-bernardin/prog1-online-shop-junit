@@ -16,3 +16,7 @@ a test class that demonstrates some of the testing functionality. Testing is fur
 discussed in the book.
 
 NOTE: There are several serious errors to be found in these classes.
+
+part ii:
+q13. tearDown() and setUp(), as well as the constructor
+q17. it allows you to view the source of the error, it also says what was returned and what was expected, alongside the method call tree from the method where the assertion took place

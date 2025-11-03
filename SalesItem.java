@@ -117,9 +117,9 @@ public class SalesItem
         System.out.println("Price: " + priceString(price));
         System.out.println();
         System.out.println("Customer comments:");
-        for(Comment comment : comments) {
+        for(int i=0;i<comments.size();++i) {
             System.out.println("-------------------------------------------");
-            System.out.println(comment.getFullDetails());
+            System.out.println(comments.get(i).getFullDetails());
         }
         System.out.println();
         System.out.println("===========================================");
@@ -132,10 +132,9 @@ public class SalesItem
      */
     public Comment findMostHelpfulComment()
     {
-        Iterator<Comment> it = comments.iterator();
-        Comment best = it.next();
-        while(it.hasNext()) {
-            Comment current = it.next();
+        Comment best=comments.get(0);
+        for(int i=0;i<comments.size();++i){
+            Comment current=comments.get(i); 
             if(current.getVoteCount() > best.getVoteCount()) {
                 best = current;
             }
@@ -158,9 +157,9 @@ public class SalesItem
      */
     private Comment findCommentByAuthor(String author)
     {
-        for(Comment comment : comments) {
-            if(comment.getAuthor().equals(author)) {
-                return comment;
+        for(int i=0;i<comments.size();++i) {
+            if(comments.get(i).getAuthor().equals(author)) {
+                return comments.get(i);
             }
         }
         return null;
@@ -171,7 +170,7 @@ public class SalesItem
      * same price. The price is given in whole cents. For example for 
      * price==12345, the following String is returned: $123.45
      */
-    private String priceString(int price)
+    public String priceString(int price)
     {
         int dollars = price / 100;
         int cents = price - (dollars*100);
